@@ -11,6 +11,8 @@ https://github.com/sparksuite/simplemde-markdown-editor/issues/328
 
 @ashleydw made a fair point with his example code, I've compiled a fully working example, with php server side uploading script.
 
+![uploa exampled](https://github.com/gautiermichelin/simplemde-markdown-editor/blob/master/drag-drop-markdown.gif?raw=true)
+
 ## Try out
 
 Download this project code and then :
@@ -32,3 +34,4 @@ Edit the beginning of index.php if you need or use it as starting point for your
 - $folder : relative path to the upload folder, from /dist folder
 - $max_filesize : size limit for the upload
 - $extensions : allowed file extensions
+
