@@ -6,7 +6,7 @@ $size         = filesize($_FILES['file']['tmp_name']);
 $extensions   = array('.png', '.gif', '.jpg', '.jpeg');
 $extension    = strrchr($_FILES['file']['name'], '.');
 
-$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . "/upload/files";
+$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . "/upload/" . $folder;
 
 //Starting security checks
 if (!in_array($extension, $extensions)) {
