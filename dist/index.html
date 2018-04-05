@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Markdown Editor - SimpleMDE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://simplemde.com/stylesheets/normalize.css" media="screen">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="https://simplemde.com/stylesheets/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="https://simplemde.com/stylesheets/github-light.css" media="screen">
+<script>
+	if(window.location.href.indexOf("sparksuite.github.io") !== -1) {
+		window.location.href = "https://simplemde.com/";
+	}
+	
+	if(window.location.protocol != "https:")
+		window.location.href = "https:"+window.location.href.substring(window.location.protocol.length);
+	</script>
+<style>
+	.editor-preview h1,
+	.editor-preview h2,
+	.editor-preview h3,
+	.editor-preview h4,
+	.editor-preview h5{
+		margin-bottom:10px;
+	}
+	
+	.editor-preview h1{
+		border-bottom:1px solid #ddd;
+	}
+	
+	.editor-preview h1{
+		border-bottom:1px solid #eee;
+	}
+	</style>
+</head>
+<body>
+
+<textarea id="demo1"># Intro
+Go ahead, play around with the editor! Be sure to check out **bold** and *italic* styling, or even [links](https://google.com). You can type the Markdown syntax, use the toolbar, or use shortcuts like `cmd-b` or `ctrl-b`.
+
+## Lists
+Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ `. Ordered lists can be started by typing `1. `.
+
+#### Unordered
+* Lists are a piece of cake
+* They even auto continue as you type
+* A double enter will end them
+* Tabs and shift-tabs work too
+
+#### Ordered
+1. Numbered lists...
+2. ...work too!
+
+## What about images?
+![Yes](https://i.imgur.com/sZlktY7.png)</textarea>
+
+<footer class="site-footer">
+<span class="site-footer-credits"><a href="https://github.com/sparksuite/simplemde-markdown-editor">SimpleMDE Markdown Editor</a> is created and maintained by <a href="https://github.com/sparksuite">Sparksuite</a><br/><a href="https://github.com/ideesculture">Drag & drop image version</a> is adapted by <a href="https://github.com/ideesculture">ideesculture</a> integrating ideas & code from @ashleydw and others on <a href="https://github.com/sparksuite/simplemde-markdown-editor/issues/328">simplemde-markdown-editor/issues/328</a></span>
+</footer>
+</section>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script src="/dist/inline-attachment.js"></script>
+<script src="/dist/codemirror-4.inline-attachment.js"></script>
+<script src="/dist/input.inline-attachment.js"></script>
+<script>
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("demo1"),
+		spellChecker: false,
+	});
+
+	inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
+	    onFileUploadResponse: function(xhr) {
+	        var result = JSON.parse(xhr.responseText),
+	        filename = result[this.settings.jsonFieldName];
+	        console.log(filename);
+	        console.log(this.filenameTag);
+	        if (result && filename) {
+	            var newValue;
+	            if (typeof this.settings.urlText === 'function') {
+	                newValue = this.settings.urlText.call(this, filename, result);
+	            } else {
+	                newValue = this.settings.urlText.replace(this.filenameTag, filename);
+	            }
+	            console.log(newValue);
+	            var text = this.editor.getValue().replace(this.lastValue, newValue);
+	            this.editor.setValue(text);
+	            this.settings.onFileUploaded.call(this, filename);
+	        }
+	        return false;
+	    },
+	    uploadUrl: '/dist/upload/index.php',
+	    jsonFieldName: 'filename',
+	    urlText: "![Image]({filename})"
+	});
+</script>
+
+</body>
+</html>
