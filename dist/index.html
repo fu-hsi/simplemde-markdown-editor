@@ -14,8 +14,8 @@
 		window.location.href = "https://simplemde.com/";
 	}
 	
-	if(window.location.protocol != "https:")
-		window.location.href = "https:"+window.location.href.substring(window.location.protocol.length);
+	//if(window.location.protocol != "https:")
+	//	window.location.href = "http:"+window.location.href.substring(window.location.protocol.length);
 	</script>
 <style>
 	.editor-preview h1,
@@ -63,9 +63,9 @@ Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-<script src="/dist/inline-attachment.js"></script>
-<script src="/dist/codemirror-4.inline-attachment.js"></script>
-<script src="/dist/input.inline-attachment.js"></script>
+<script src="/inline-attachment.js"></script>
+<script src="/codemirror-4.inline-attachment.js"></script>
+<script src="/input.inline-attachment.js"></script>
 <script>
 	var simplemde = new SimpleMDE({
 		element: document.getElementById("demo1"),
@@ -92,7 +92,7 @@ Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ 
 	        }
 	        return false;
 	    },
-	    uploadUrl: '/dist/upload/index.php',
+	    uploadUrl: '/upload/index.php',
 	    jsonFieldName: 'filename',
 	    urlText: "![Image]({filename})"
 	});
