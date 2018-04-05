@@ -37,24 +37,41 @@
 </head>
 <body>
 
-<textarea id="demo1"># Intro
-Go ahead, play around with the editor! Be sure to check out **bold** and *italic* styling, or even [links](https://google.com). You can type the Markdown syntax, use the toolbar, or use shortcuts like `cmd-b` or `ctrl-b`.
+<textarea id="demo1"># SimpleMDE - Markdown Editor
 
-## Lists
-Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ `. Ordered lists can be started by typing `1. `.
+## SimpleMDE documentation
+Please check :
+[https://github.com/sparksuite/simplemde-markdown-editor](https://github.com/sparksuite/simplemde-markdown-editor)
 
-#### Unordered
-* Lists are a piece of cake
-* They even auto continue as you type
-* A double enter will end them
-* Tabs and shift-tabs work too
+## This fork's objective
 
-#### Ordered
-1. Numbered lists...
-2. ...work too!
+We have made this fork as a simple example of the suggestions made here :
+https://github.com/sparksuite/simplemde-markdown-editor/issues/328
 
-## What about images?
-![Yes](https://i.imgur.com/sZlktY7.png)</textarea>
+@ashleydw made a fair point with his example code, I've compiled a fully working example, with php server side uploading script.
+
+## Try out
+
+Download this project code and then :
+```
+cd simplemde-markdown-editor
+cd dist
+php -S localhost:8000
+```
+
+Open a browser and go to http://localhost:8000
+
+You can now test and edit the example text, ... and you can drag and drop an image.
+
+## Customize
+
+Images are uploaded inside dist/upload/files. Files are renamed at the upload (I'm used to huge-fan-don-t-want-to-cease-using-spaces-punctuations-and-accents-inside-filenames end users).
+
+Edit the beginning of index.php if you need or use it as starting point for your own code :
+- $folder : relative path to the upload folder, from /dist folder
+- $max_filesize : size limit for the upload
+- $extensions : allowed file extensions
+</textarea>
 
 <footer class="site-footer">
 <span class="site-footer-credits"><a href="https://github.com/sparksuite/simplemde-markdown-editor">SimpleMDE Markdown Editor</a> is created and maintained by <a href="https://github.com/sparksuite">Sparksuite</a><br/><a href="https://github.com/ideesculture">Drag & drop image version</a> is adapted by <a href="https://github.com/ideesculture">ideesculture</a> integrating ideas & code from @ashleydw and others on <a href="https://github.com/sparksuite/simplemde-markdown-editor/issues/328">simplemde-markdown-editor/issues/328</a></span>
