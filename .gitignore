@@ -7,3 +7,5 @@ bower_components/
 *.ipr
 *.iws
 .idea/
+/.DS_Store
+.DS_Store
