@@ -84,35 +84,43 @@ Edit the beginning of index.php if you need or use it as starting point for your
 <script src="/codemirror-4.inline-attachment.js"></script>
 <script src="/input.inline-attachment.js"></script>
 <script>
-	var simplemde = new SimpleMDE({
-		element: document.getElementById("demo1"),
-		spellChecker: false,
-	});
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("demo1"),
+        spellChecker: false,
+    });
 
-	inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-	    onFileUploadResponse: function(xhr) {
-	        var result = JSON.parse(xhr.responseText),
-	        filename = result[this.settings.jsonFieldName];
-	        console.log(filename);
-	        console.log(this.filenameTag);
-	        if (result && filename) {
-	            var newValue;
-	            if (typeof this.settings.urlText === 'function') {
-	                newValue = this.settings.urlText.call(this, filename, result);
-	            } else {
-	                newValue = this.settings.urlText.replace(this.filenameTag, filename);
-	            }
-	            console.log(newValue);
-	            var text = this.editor.getValue().replace(this.lastValue, newValue);
-	            this.editor.setValue(text);
-	            this.settings.onFileUploaded.call(this, filename);
-	        }
-	        return false;
-	    },
-	    uploadUrl: '/upload/index.php',
-	    jsonFieldName: 'filename',
-	    urlText: "![Image]({filename})"
-	});
+    inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
+        onFileUploadResponse: function(xhr) {
+            var result = JSON.parse(xhr.responseText),
+                filename = result[this.settings.jsonFieldName];
+
+            if (result) {
+                if (filename) {
+                    var newValue;
+                    if (typeof this.settings.urlText === 'function') {
+                        newValue = this.settings.urlText.call(this, filename, result);
+                    } else {
+                        newValue = this.settings.urlText.replace(this.filenameTag, filename);
+                    }
+
+                    var text = this.editor.getValue().replace(this.lastValue, newValue);
+                    this.editor.setValue(text);
+                    this.settings.onFileUploaded.call(this, filename);
+                } else {
+                    alert(result);
+                    newValue = '';
+
+                    var text = this.editor.getValue().replace(this.lastValue, newValue);
+                    this.editor.setValue(text);
+                }
+            }
+
+            return false;
+        },
+        uploadUrl: '/pages/upload',
+        jsonFieldName: 'filename',
+        urlText: "![]({filename})"
+    });
 </script>
 
 </body>
